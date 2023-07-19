@@ -19,7 +19,7 @@ jobs:
        run: echo "code build is done"
         
    test:
-     needs: [checkout, build]
+     needs: [checkout]
      runs-on: ubuntu-latest
      
      steps:
