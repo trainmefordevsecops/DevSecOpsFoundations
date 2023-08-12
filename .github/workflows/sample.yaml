@@ -16,13 +16,20 @@ jobs:
           repository: juice-shop/juice-shop
 
       - name: Build
-        run: echo "Code build completed"
+        run: |
+          echo "listing all directories and files"
+          ls -R ${{ github.workspace }}
 
-      - name: Test 
+      - name: Docker Container Security Test 
         run: |
           echo "Security Testing Continer"
           docker pull bkimminich/juice-shop
           docker run --name containersecurity -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image bkimminich/juice-shop
+
+      - name: SAST security test
+        run: |
+          echo "Security Testing for SAST"
+
 
       - name: Deploy
         run: |
