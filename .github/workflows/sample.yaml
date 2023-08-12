@@ -29,7 +29,7 @@ jobs:
 
       - name: SCA
         env:
-          SNYK_TOKEN: ${{ vars.SNYK_TOKEN }}
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: |
           echo "run SCA security checks"
           #echo $SNYK_TOKEN
