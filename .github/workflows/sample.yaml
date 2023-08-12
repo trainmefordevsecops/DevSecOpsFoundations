@@ -3,7 +3,7 @@ name: Streamlined-DevSecOps-Pipeline
 on:
   push:
     branches:
-      - main
+      - pipeline
 
 jobs:
   streamlined-pipeline:
