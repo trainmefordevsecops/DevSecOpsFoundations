@@ -33,7 +33,7 @@ jobs:
         run: |
           echo "run SCA security checks"
           cd ${{ github.workspace }}
-          docker --login --token $SNYK_TOKEN
+          docker login --token $SNYK_TOKEN
           docker run --name sca -e SNYK_TOKEN=$SNYK_TOKEN -v juice-shop:/app snyk/snyk:node || true
 
       #- name: Docker Container Security Test 
