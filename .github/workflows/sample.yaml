@@ -3,7 +3,7 @@ name: DevSecOps Foundations
 on:
   push:
      branches:
-       - main
+       - pipeline
 jobs:
    checkout:
      runs-on: ubuntu-latest
