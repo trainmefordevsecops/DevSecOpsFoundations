@@ -11,9 +11,9 @@ jobs:
 
     steps:
       - name: Checkout Source Code
-        uses: actions/checkout@v2
-        with:
-          repository: juice-shop/juice-shop
+        run: |
+          echo "clone vulnerable repository"
+          git clone https://github.com/juice-shop/juice-shop.git
 
       - name: Build
         run: |
