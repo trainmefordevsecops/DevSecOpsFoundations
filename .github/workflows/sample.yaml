@@ -15,11 +15,11 @@ jobs:
           echo "clone vulnerable repository"
           git clone https://github.com/juice-shop/juice-shop.git
 
-     # - name: Build
-     #   run: |
-     #     echo "listing all directories and files"
-     #     cd ${{ github.workspace }}/juice-shop
-     #     npm install
+      - name: Build
+        run: |
+          echo "listing all directories and files"
+          cd ${{ github.workspace }}/juice-shop
+          npm install
 
      # - name: SAST
      #   run: |
