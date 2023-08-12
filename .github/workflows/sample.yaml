@@ -11,7 +11,9 @@ jobs:
 
     steps:
       - name: Checkout Source Code
-        run: echo "Checked out source code"
+        uses: actions/checkout@v2
+        with:
+          repository: juice-shop/juice-shop
 
       - name: Build
         run: echo "Code build completed"
