@@ -1,2 +1,2 @@
 # DevSecOpsFoundations
-DevSecOps Foundations Repository
+DevSecOps Foundations Sample Pipeline Repository
