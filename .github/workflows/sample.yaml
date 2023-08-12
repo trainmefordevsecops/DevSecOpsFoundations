@@ -18,7 +18,8 @@ jobs:
       - name: Build
         run: |
           echo "listing all directories and files"
-          ls -R ${{ github.workspace }}
+          cd ${{ github.workspace }}/juice-shop
+          npm install
 
       - name: Docker Container Security Test 
         run: |
