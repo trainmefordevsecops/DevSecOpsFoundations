@@ -16,8 +16,11 @@ jobs:
       - name: Build
         run: echo "Code build completed"
 
-      - name: Test
-        run: echo "Testing phase finished"
+      - name: Test 
+        script:
+          - echo "Security Testing Continer"
+          - docker pull bkimminich/juice-shop
+          - docker run --name containersecurity -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image bkimminich/juice-shop
 
       - name: Deploy
         run: |
