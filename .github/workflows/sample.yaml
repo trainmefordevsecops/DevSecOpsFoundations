@@ -48,8 +48,12 @@ jobs:
           docker run -d -p 3000:3000 --name juiceshop bkimminich/juice-shop 
           juiceip=$(docker inspect -f "{{.NetworkSettings.Networks.bridge.IPAddress }}" juiceshop)
           docker run -t --name dast ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://$juiceip:3000 || true
-          if [[ "$(docker logs dast &> dast.log; cat dast.log | grep "WARN-NEW: [1-9]\d+" | wc -l)" -gt 0 ]]; then echo "failed due to dast security 
+          docker logs dast &> dast.log
+          cat dast.log
+          if [[ "$(docker logs dast &> dast.log; cat dast.log | grep 'WARN-NEW: [1-9]\d+' | wc -l)" -gt 0 ]]; then echo "failed due to dast security 
           issues"; exit 1; else echo "All Good to proceed"; exit 0; fi
+
+WARN-NEW: 9
 
       #- name: Deploy
       #  run: |
