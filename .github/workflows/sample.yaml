@@ -45,7 +45,7 @@ jobs:
       - name: SAST Security Test
         run: |
           echo "run SAST security checks"
-          docker run -t --name sast -v juice-shop:/path checkmarx/kics:latest scan -p /path -o "/path/" || true
+          docker run -t --name sast -v juice-shop:/path checkmarx/kics:latest scan -p /path -o "/path/" 
                     #if [[ "$(docker logs sast &> sast.log;  cat sast.log | grep 'HIGH' | tail -n 1 | awk '{print $2;}')" != 0 ]]; then echo "failed due to sast security
           #issues"; exit 1; else echo "All Good to proceed"; exit 0; fi
 
