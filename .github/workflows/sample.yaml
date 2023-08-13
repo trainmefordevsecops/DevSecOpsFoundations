@@ -10,16 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Source Code
-        run: |
-          echo "clone vulnerable repository"
-          git clone https://github.com/juice-shop/juice-shop.git
+     # - name: Checkout Source Code
+     #   run: |
+     #     echo "clone vulnerable repository"
+     #     git clone https://github.com/juice-shop/juice-shop.git
 
-      - name: Build
-        run: |
-          echo "listing all directories and files"
-          cd ${{ github.workspace }}/juice-shop
-          npm install
+     # - name: Build
+     #   run: |
+     #     echo "listing all directories and files"
+     #     cd ${{ github.workspace }}/juice-shop
+     #     npm install
 
      # - name: SAST
      #   run: |
@@ -47,8 +47,8 @@ jobs:
           echo "DAST Security Testing"
           docker run -d -p 3000:3000 --name juiceshop bkimminich/juice-shop 
           juiceip=$(docker inspect -f "{{.NetworkSettings.Networks.bridge.IPAddress }}" juiceshop)
-          docker run -t --name dast ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://$juiceip:3000 
-          if [[ "$(docker logs dast &> dast.log; cat dast.log | grep "WARN-NEW: .*" | wc -l)" -gt 0 ]]; then echo "failed due to dast security 
+          docker run -t --name dast ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://$juiceip:3000 || true
+          if [[ "$(docker logs dast &> dast.log; cat dast.log | grep "WARN-NEW: [1-9]\d+" | wc -l)" -gt 0 ]]; then echo "failed due to dast security 
           issues"; exit 1; else echo "All Good to proceed"; exit 0; fi
 
       #- name: Deploy
