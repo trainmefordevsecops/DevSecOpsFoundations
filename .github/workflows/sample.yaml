@@ -46,8 +46,8 @@ jobs:
         run: |
           echo "run SAST security checks"
           docker run -t --name sast -v juice-shop:/path checkmarx/kics:latest scan -p /path -o "/path/" 
-                    #if [[ "$(docker logs sast &> sast.log;  cat sast.log | grep 'HIGH' | tail -n 1 | awk '{print $2;}')" != 0 ]]; then echo "failed due to sast security
-          #issues"; exit 1; else echo "All Good to proceed"; exit 0; fi
+          if [[ "$(docker logs sast &> sast.log;  cat sast.log | grep 'HIGH' | tail -n 1 | awk '{print $2;}')" != 0 ]]; then echo "failed due to sast security
+          issues"; exit 1; else echo "All Good to proceed"; exit 0; fi
 
   sca:
     runs-on: ubuntu-latest
@@ -64,8 +64,8 @@ jobs:
           echo "run SCA security checks"
           cd juice-shop
           docker run --name sca -e SNYK_TOKEN=$SNYK_TOKEN -v ./:/app snyk/snyk:node || true
-          #if [[ "$(docker logs sca &> sca.log; cat sca.log | grep -o 'found [1-9]\d* issues' | awk '{print $2;}')" != 0 ]]; then echo "failed due to sca security
-          #issues"; exit 1; else echo "All Good to proceed"; exit 0; fi
+          if [[ "$(docker logs sca &> sca.log; cat sca.log | grep -o 'found [1-9]\d* issues' | awk '{print $2;}')" != 0 ]]; then echo "failed due to sca security
+          issues"; exit 1; else echo "All Good to proceed"; exit 0; fi
 
   containerscan:
     runs-on: ubuntu-latest
@@ -76,8 +76,8 @@ jobs:
           echo "Security Testing Container"
           docker pull bkimminich/juice-shop
           docker run --name containersecurity -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image bkimminich/juice-shop || true
-          #if [[ "$(docker logs containersecurity &> containersecurity.log;  cat containersecurity.log | grep -o 'CRITICAL: [1-9]\d*'  | awk '{print $2;}')" -gt 0 ]]; then echo "failed due to container security
-          #issues"; exit 1; else echo "All Good to proceed"; exit 0; fi
+          if [[ "$(docker logs containersecurity &> containersecurity.log;  cat containersecurity.log | grep -o 'CRITICAL: [1-9]\d*'  | awk '{print $2;}')" -gt 0 ]]; then echo "failed due to container security
+          issues"; exit 1; else echo "All Good to proceed"; exit 0; fi
 
   dast:
     runs-on: ubuntu-latest
@@ -90,8 +90,8 @@ jobs:
           juiceip=$(docker inspect -f "{{.NetworkSettings.Networks.bridge.IPAddress }}" juiceshop)
           docker run -t --name dast ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://$juiceip:3000 || true
           docker logs dast &> dast.log
-          #if [[ "$(docker logs dast &> dast.log; tail -n 1 dast.log | grep -o 'WARN-NEW. [1-9]\d*' | awk '{print $2;}')" -gt 0 ]]; then echo "failed due to dast security
-          #issues"; exit 1; else echo "All Good to proceed"; exit 0; fi
+          if [[ "$(docker logs dast &> dast.log; tail -n 1 dast.log | grep -o 'WARN-NEW. [1-9]\d*' | awk '{print $2;}')" -gt 0 ]]; then echo "failed due to dast security
+          issues"; exit 1; else echo "All Good to proceed"; exit 0; fi
 
   deploy:
     runs-on: ubuntu-latest
