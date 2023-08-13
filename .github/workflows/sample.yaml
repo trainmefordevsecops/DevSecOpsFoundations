@@ -25,7 +25,7 @@ jobs:
         run: |
           echo "run SAST security checks"
           docker run -t --name sast -v ${{ github.workspace }}/juice-shop:/path checkmarx/kics:latest scan -p /path -o "/path/" || true
-          if [[ "$(docker logs sast &> sast.log;  cat sast.log | grep -o 'HIGH: [1-9]\d*'  | awk '{print $2;}')" -gt 0 ]]; then echo "failed due to sast security
+          if [[ "$(docker logs sast &> sast.log;  cat sast.log | grep 'HIGH' | tail -n 1 | awk '{print $2;}')" -gt 0 ]]; then echo "failed due to sast security
           issues"; exit 1; else echo "All Good to proceed"; exit 0; fi
 
 
