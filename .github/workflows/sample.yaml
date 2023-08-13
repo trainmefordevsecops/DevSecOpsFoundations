@@ -53,7 +53,6 @@ jobs:
           if [[ "$(docker logs dast &> dast.log; cat dast.log | grep 'WARN-NEW: [1-9]\d+' | wc -l)" -gt 0 ]]; then echo "failed due to dast security 
           issues"; exit 1; else echo "All Good to proceed"; exit 0; fi
 
-WARN-NEW: 9
 
       #- name: Deploy
       #  run: |
