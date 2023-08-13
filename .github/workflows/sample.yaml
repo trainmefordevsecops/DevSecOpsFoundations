@@ -35,7 +35,7 @@ jobs:
           echo "run SCA security checks"
           cd ${{ github.workspace }}/juice-shop
           docker run --name sca -e SNYK_TOKEN=$SNYK_TOKEN -v ./:/app snyk/snyk:node || true
-          if [[ "$(docker logs sca &> sca.log; cat sca.log | grep -o 'found [1-9]\d* issues' | awk '{print $2;}')" -gt 0 ]]; then echo "failed due to sca security
+          if [[ "$(docker logs sca &> sca.log; cat sca.log | grep -o 'found [1-9]\d* issues' | awk '{print $2;}')" != 0 ]]; then echo "failed due to sca security
           issues"; exit 1; else echo "All Good to proceed"; exit 0; fi
 
 
