@@ -36,24 +36,21 @@ jobs:
      #     cd ${{ github.workspace }}/juice-shop
      #     docker run --name sca -e SNYK_TOKEN=$SNYK_TOKEN -v ./:/app snyk/snyk:node || true
 
-      #- name: Docker Container Security Test 
-      #  run: |
-      #    echo "Security Testing Container"
-      #    docker pull bkimminich/juice-shop
-      #    docker run --name containersecurity -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image bkimminich/juice-shop || true
-
-      - name: DAST
+      - name: Docker Container Security Test 
         run: |
-          echo "DAST Security Testing"
-          docker run -d -p 3000:3000 --name juiceshop bkimminich/juice-shop 
-          juiceip=$(docker inspect -f "{{.NetworkSettings.Networks.bridge.IPAddress }}" juiceshop)
-          docker run -t --name dast ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://$juiceip:3000 || true
-          docker logs dast &> dast.log
-          #sleep 20
-          #cat dast.log | grep 'WARN-NEW: [1-9]\d+' 
-          #echo "check above for grep"
-          if [[ "$(docker logs dast &> dast.log; tail -n 1 dast.log | grep -o 'WARN-NEW. [1-9]\d*' | awk '{print $2;}')" -gt 0 ]]; then echo "failed due to dast security 
-          issues"; exit 1; else echo "All Good to proceed"; exit 0; fi
+          echo "Security Testing Container"
+          docker pull bkimminich/juice-shop
+          docker run --name containersecurity -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image bkimminich/juice-shop || true
+
+     # - name: DAST
+     #   run: |
+     #     echo "DAST Security Testing"
+     #     docker run -d -p 3000:3000 --name juiceshop bkimminich/juice-shop 
+     #     juiceip=$(docker inspect -f "{{.NetworkSettings.Networks.bridge.IPAddress }}" juiceshop)
+     #     docker run -t --name dast ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://$juiceip:3000 || true
+     #     docker logs dast &> dast.log
+     #     if [[ "$(docker logs dast &> dast.log; tail -n 1 dast.log | grep -o 'WARN-NEW. [1-9]\d*' | awk '{print $2;}')" -gt 0 ]]; then echo "failed due to dast security 
+     #     issues"; exit 1; else echo "All Good to proceed"; exit 0; fi
 
 
       #- name: Deploy
