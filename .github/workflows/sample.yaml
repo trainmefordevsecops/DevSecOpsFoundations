@@ -45,9 +45,9 @@ jobs:
       - name: DAST
         run: |
           echo "DAST Security Testing"
-          docker run -d -p 9000:9000 --name juiceshop bkimminich/juice-shop 
+          docker run -d -p 3000:3000 --name juiceshop bkimminich/juice-shop 
           juiceip=$(docker inspect -f "{{.NetworkSettings.Networks.bridge.IPAddress }}" juiceshop)
-          docker run -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://$juiceip:9000 
+          docker run -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://$juiceip:3000 
 
       #- name: Deploy
       #  run: |
