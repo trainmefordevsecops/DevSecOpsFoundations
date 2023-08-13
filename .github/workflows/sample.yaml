@@ -1,42 +1,66 @@
-name: DevSecOps Foundations
+name: Streamlined-DevSecOps-Pipeline
 
 on:
   push:
-     branches:
-       - main
+    branches:
+      - devsecops-pipeline
+
 jobs:
-   checkout:
-     runs-on: ubuntu-latest
-      
-     steps:
-     - name: checkout source code
-       run: echo "checkout of code is done"
-   build:
-     runs-on: ubuntu-latest
-     needs: [checkout]
-     steps:
-     - name: build
-       run: echo "code build is done"
-        
-   test:
-     needs: [checkout]
-     runs-on: ubuntu-latest
-     
-     steps:
-     - name: test
-       run: echo "testing is done"
-   
-   deploy: 
-     runs-on: ubuntu-latest
-     needs: [test]
-      
-     steps:
-     - name: deploy
-       run: | 
-         echo "deployment completed"
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout source code
+        run: |
+          echo "Checkout of code is done"
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [checkout]
+    steps:
+      - name: Build
+        run: |
+          echo "Code build is done"
+
+  sast:
+    runs-on: ubuntu-latest
+    needs: [checkout, build]
+    steps:
+     - name: SAST Security Test
+       run: |
+         echo "run SAST security checks"
+
+  sca:
+    runs-on: ubuntu-latest
+    needs: [checkout, build]
+    steps:
+     - name: SCA Security Test
+       env:
+         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+       run: |
+         echo "run SCA security checks"
+
+  containerscan:
+    runs-on: ubuntu-latest
+    needs: [checkout, build]
+    steps:
+     - name: Container Security Test
+       run: |
+         echo "run Container security checks"
+
+  dast:
+    runs-on: ubuntu-latest
+    needs: [checkout, build]
+    steps:
+     - name: dast vulnerability Security Test
+       run: |
+         echo "dast vulnerability  security checks"
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [checkout, build, containerscan, sca, sast, dast]
+    steps:
+     - name: application deploymnent
+       run: |
+         echo "Deployment Completed"
          java -version
          python --version
-     
-    
-    
-     

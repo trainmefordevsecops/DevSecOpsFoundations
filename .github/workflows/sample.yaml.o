@@ -1,0 +1,42 @@
+name: DevSecOps Foundations
+
+on:
+  push:
+     branches:
+       - main
+jobs:
+   checkout:
+     runs-on: ubuntu-latest
+      
+     steps:
+     - name: checkout source code
+       run: echo "checkout of code is done"
+   build:
+     runs-on: ubuntu-latest
+     needs: [checkout]
+     steps:
+     - name: build
+       run: echo "code build is done"
+        
+   test:
+     needs: [checkout]
+     runs-on: ubuntu-latest
+     
+     steps:
+     - name: test
+       run: echo "testing is done"
+   
+   deploy: 
+     runs-on: ubuntu-latest
+     needs: [test]
+      
+     steps:
+     - name: deploy
+       run: | 
+         echo "deployment completed"
+         java -version
+         python --version
+     
+    
+    
+     
