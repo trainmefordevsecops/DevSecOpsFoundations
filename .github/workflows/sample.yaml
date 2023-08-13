@@ -41,7 +41,7 @@ jobs:
           echo "Security Testing Container"
           docker pull bkimminich/juice-shop
           docker run --name containersecurity -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image bkimminich/juice-shop || true
-          if [[ "$(docker logs containersecurity &> containersecurity.log;  cat containersecurity.log | grep -o 'CRITICAL:'  | awk '{print $2;}')" -gt 0 ]]; then echo "failed due to container security
+          if [[ "$(docker logs containersecurity &> containersecurity.log;  cat containersecurity.log | grep -o 'CRITICAL: [1-9]\d*'  | awk '{print $2;}')" -gt 0 ]]; then echo "failed due to container security
           issues"; exit 1; else echo "All Good to proceed"; exit 0; fi
 
      # - name: DAST
