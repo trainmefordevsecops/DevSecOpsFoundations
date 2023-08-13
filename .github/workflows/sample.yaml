@@ -13,10 +13,11 @@ jobs:
         run: |
           echo "Checkout of code is done"
           git clone https://github.com/juice-shop/juice-shop.git
-        artifacts:
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v2
+        with:
           name: source-code
-          paths:
-            - juice-shop
+          path: juice-shop
 
   build:
     runs-on: ubuntu-latest
