@@ -33,7 +33,7 @@ jobs:
           #cd ${{ github.workspace }}/juice-shop
           cd juice-shop
           npm install
-       - name: Archive artifacts of build
+      - name: Archive artifacts of build
         uses: actions/upload-artifact@v2
         with:
           name: build-code
