@@ -33,6 +33,11 @@ jobs:
           #cd ${{ github.workspace }}/juice-shop
           cd juice-shop
           npm install
+       - name: Archive artifacts of build
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-code
+          path: .
 
   sast:
     needs: [checkout, build]
@@ -57,7 +62,7 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v2
         with:
-          name: source-code
+          name: build-code
       - name: SCA Security Test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
