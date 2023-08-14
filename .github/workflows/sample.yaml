@@ -33,11 +33,11 @@ jobs:
           #cd ${{ github.workspace }}/juice-shop
           cd juice-shop
           npm install
-      - name: Archive artifacts of build
-        uses: actions/upload-artifact@v2
-        with:
-          name: build-code
-          path: .
+      #- name: Archive artifacts of build
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #    name: build-code
+      #    path: .
 
   sast:
     needs: [checkout, build]
@@ -62,13 +62,14 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v2
         with:
-          name: build-code
+          name: source-code
       - name: SCA Security Test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: |
           echo "run SCA security checks"
           cd juice-shop
+          npm install
           docker run --name sca -e SNYK_TOKEN=$SNYK_TOKEN -v ./:/app snyk/snyk:node 
           #if [[ "$(docker logs sca &> sca.log; cat sca.log | grep -o 'found [1-9]\d* issues' | awk '{print $2;}')" != 0 ]]; then echo "failed due to sca security
           #issues"; exit 1; else echo "All Good to proceed"; exit 0; fi
