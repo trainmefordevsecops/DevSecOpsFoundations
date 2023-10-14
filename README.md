@@ -7,17 +7,23 @@ Welcome to the DevSecOps Foundations course! This comprehensive and hands-on cou
 [DevSecOps Fundamentals](devsecops.png)
 
 ## What You'll Learn
-Understanding DevSecOps: Learn about the core concepts and principles of DevSecOps, and understand how it bridges the gap between development, operations, and security.
+Understanding DevSecOps: 
+Learn about the core concepts and principles of DevSecOps, and understand how it bridges the gap between development, operations, and security.
 
-# Security Automation: Discover how to automate security tasks, including vulnerability assessment, code analysis, and compliance checks, to ensure continuous security.
+# Security Automation: 
+Discover how to automate security tasks, including vulnerability assessment, code analysis, and compliance checks, to ensure continuous security.
 
-# Infrastructure as Code (IaC) Security: Learn how to secure your infrastructure by implementing security practices directly into your Infrastructure as Code (IaC) templates.
+# Infrastructure as Code (IaC) Security: 
+Learn how to secure your infrastructure by implementing security practices directly into your Infrastructure as Code (IaC) templates.
 
-# Container Security: Explore techniques for securing containerized applications and microservices, ensuring your deployments are resilient against security threats.
+# Container Security: 
+Explore techniques for securing containerized applications and microservices, ensuring your deployments are resilient against security threats.
 
-# Continuous Integration & Continuous Deployment (CI/CD) Pipelines: Master the art of integrating security into CI/CD pipelines, ensuring that every code change is thoroughly tested and validated for security vulnerabilities.
+# Continuous Integration & Continuous Deployment (CI/CD) Pipelines: 
+Master the art of integrating security into CI/CD pipelines, ensuring that every code change is thoroughly tested and validated for security vulnerabilities.
 
-# Threat Detection & Incident Response: Gain insights into identifying and responding to security threats in a DevOps environment, and develop strategies to mitigate potential risks.
+# Threat Detection & Incident Response:
+Gain insights into identifying and responding to security threats in a DevOps environment, and develop strategies to mitigate potential risks.
 
 ## Why Enroll in This Course?
 Practical Approach: Our course is focused on hands-on learning, where you'll work on real-world exercises and projects that simulate actual DevSecOps scenarios.
