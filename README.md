@@ -4,7 +4,7 @@ Welcome to DevSecOps Foundations Course!
 ## Course Overview
 Welcome to the DevSecOps Foundations course! This comprehensive and hands-on course is designed to equip you with the essential skills and knowledge required to integrate security practices seamlessly into the world of DevOps. Whether you're a developer, operations engineer, or security professional, this course will provide you with a solid foundation in DevSecOps principles and practices.
 
-[DevSecOps Fundamentals](devsecops.png)
+![DevSecOps Fundamentals](devsecops.png)
 
 ## What You'll Learn
 Understanding DevSecOps: 
