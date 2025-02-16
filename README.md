@@ -58,7 +58,7 @@ Eagerness to learn and a passion for improving your DevSecOps skills!
 ## Enroll Now
 Don't miss out on this opportunity to become a proficient DevSecOps practitioner. Click here to enroll in the course now and take the first step towards mastering the art of blending development, operations, and security.
 
-https://www.udemy.com/course/fundamentals-of-devsecops-handson-included/?referralCode=2727A08C4E20FEAB3BCA
+https://shorturl.at/H9kqG
 
 
 Let's embark on this exciting journey of DevSecOps together! Your secure and resilient DevOps workflows await.
