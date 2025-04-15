@@ -47,19 +47,19 @@ jobs:
       - name: Test
         run: echo "Testing is done"
 
-  dast:
+  deploy:
     runs-on: ubuntu-latest
     needs: [test]
     steps:
-      - name: Dynamic Application Security Testing (DAST)
-        run: echo "Running DAST against staging environment..."
+      - name: Dev Env Deployment 
+        run: echo "Deploying to the dev env"
 
-  deploy:
+  dast:
     runs-on: ubuntu-latest
-    needs: [dast]
+    needs: [deploy]
     steps:
-      - name: Deploy
+      - name: Dynamic Application Security Testing (DAST)
         run: |
-          echo "Deployment completed"
+          echo "Dast scan completed"
           java -version
           python --version
