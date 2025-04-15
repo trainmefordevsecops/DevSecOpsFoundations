@@ -2,41 +2,64 @@ name: DevSecOps Foundations
 
 on:
   push:
-     branches:
-       - main
+    branches:
+      - main
+
 jobs:
-   checkout:
-     runs-on: ubuntu-latest
-      
-     steps:
-     - name: checkout source code
-       run: echo "checkout of code is done"
-   build:
-     runs-on: ubuntu-latest
-     needs: [checkout]
-     steps:
-     - name: build
-       run: echo "code build is done"
-        
-   test:
-     needs: [checkout]
-     runs-on: ubuntu-latest
-     
-     steps:
-     - name: test
-       run: echo "testing is done"
-   
-   deploy: 
-     runs-on: ubuntu-latest
-     needs: [test]
-      
-     steps:
-     - name: deploy
-       run: | 
-         echo "deployment completed"
-         java -version
-         python --version
-     
-    
-    
-     
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        run: echo "Checkout of code is done"
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [checkout]
+    steps:
+      - name: Build
+        run: echo "Code build is done"
+
+  sast:
+    runs-on: ubuntu-latest
+    needs: [checkout]
+    steps:
+      - name: Static Application Security Testing (SAST)
+        run: echo "Running SAST scan..."
+
+  sca:
+    runs-on: ubuntu-latest
+    needs: [checkout]
+    steps:
+      - name: Software Composition Analysis (SCA)
+        run: echo "Running SCA to check for vulnerable libraries..."
+
+  container-scan:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Container Image Scan
+        run: echo "Scanning container image for vulnerabilities..."
+
+  test:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Test
+        run: echo "Testing is done"
+
+  dast:
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - name: Dynamic Application Security Testing (DAST)
+        run: echo "Running DAST against staging environment..."
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [dast]
+    steps:
+      - name: Deploy
+        run: |
+          echo "Deployment completed"
+          java -version
+          python --version
